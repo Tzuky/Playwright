@@ -9,7 +9,7 @@ test('Open Page go to My Info - Check Logout', async ({ page }) => {
   await page.getByRole('button', { name: 'Login' }).click();
   await page.getByRole('link', { name: 'My Info' }).click();
   await expect(page.getByText('Personal Details')).toBeVisible;
-  await page.locator('span').filter({ hasText: 'Paul Collings' }).locator('i').click();
-  await page.getByRole('menuitem', { name: 'Logout' }).click();
+  await page.locator('.oxd-userdropdown-tab').click();
+  await page.locator('li:nth-of-type(4) > a[role=\'menuitem\']').click();
 
 });
