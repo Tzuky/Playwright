@@ -16,20 +16,23 @@ test('Add User - Verify - Delete - Logout', async ({ page }) => {
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press('Enter');
   await page.locator('[placeholder=\'Type for hints\.\.\.\']').fill('Alice Duval');
-  await page.locator('div:nth-of-type(3) > .oxd-input-field-bottom-space.oxd-input-group > div:nth-of-type(2) > .oxd-select-wrapper > .oxd-select-text  .bi-caret-down-fill.oxd-icon.oxd-select-text--arrow').click();
-  await page.locator('.oxd-select-text.oxd-select-text--error > .oxd-select-text-input').click();
-  await page.keyboard.down;
-  await page.keyboard.down;
-  await page.keyboard.press;
-  await page.locator('.oxd-autocomplete-text-input > input[placeholder=\'Type for hints...\']').fill('Alice Duval');
-
-
-
-
-  await page.locator('div:nth-of-type(2) > .oxd-input').fill('User-New')
-  await page.locator('.orangehrm-left-space').click();
-  await expect(page.locator('.oxd-table-card [role=\'cell\']:nth-of-type(4) div')).toHaveText('Odis Adalwin');
-  await expect(page.locator('.oxd-table-card [role=\'cell\']:nth-of-type(5) div')).toHaveText('Enabled');
+  await page.waitForTimeout(2000);
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press('Enter');
+  await page.locator('//div[@id=\'app\']/div[@class=\'oxd-layout\']/div[@class=\'oxd-layout-container\']/div[@class=\'oxd-layout-context\']//form[@class=\'oxd-form\']/div[@class=\'oxd-form-row\']/div/div[3]/div/div[2]/div[@class=\'oxd-select-wrapper\']/div//i').click();
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press('Enter');
+  await page.locator('.oxd-form .oxd-form-row:nth-of-type(1) [autocomplete]').fill('New-User');
+  await page.locator('.oxd-grid-item.oxd-grid-item--gutters.user-password-cell > .oxd-input-field-bottom-space.oxd-input-group  .oxd-input').fill('pass123');
+  await page.locator('.oxd-grid-item--gutters:nth-of-type(2) [type]').fill('pass123');
+  await page.locator('.orangehrm-left-space.oxd-button.oxd-button--medium.oxd-button--secondary').click();
+  await page.waitForTimeout(5000);
+  await page.locator('[class] .oxd-grid-item--gutters:nth-of-type(1) input').fill('New-User');
+  await page.locator('.orangehrm-left-space.oxd-button.oxd-button--medium.oxd-button--secondary').click();
+  await expect(page.getByText('Alice Duval')).toBeVisible;
+  await page.locator('.bi-trash').click();
+  await page.locator('.oxd-button--label-danger').click();
+  await expect(page.getByText('New-User')).toBeHidden();
   await page.locator('.oxd-userdropdown-tab').click();
   await page.locator('li:nth-of-type(4) > a[role=\'menuitem\']').click();
 
